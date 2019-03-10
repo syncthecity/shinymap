@@ -20,8 +20,8 @@ groups <- c('Arts and Culture',
             'Housing and Community Development',
             'Sustainability',
             'Workforce and Economic Development',
-            'Unknown')    
-    
+            'Unknown')
+
 # add groupings to organization codes 
 AC_list <- c('Animal-Related',
              'Arts, Culture and Humanities', 	
@@ -97,6 +97,12 @@ shinyServer(function(input, output) {
 
     })
     
+    # create color palette for coloring groups on map 
+    colorpal <- reactive({
+        # re-ordered version of the Set2 palette from RColorBrewer
+        colorFactor(
+            c('#66C2A5', '#FC8D62', '#8DA0CB', '#E78AC3', '#FFD92F', '#A6D854', '#B3B3B3', '#E5C494'), groups)
+    })
     
     # create base for leaflet map output
     output$map <- renderLeaflet({
@@ -108,12 +114,31 @@ shinyServer(function(input, output) {
 
     })
     
+    # add circlemarkers based on groups input
     observe({
+        
+        pal <- colorpal()
 
         leafletProxy('map', data = filtered_geo()) %>%
             clearMarkers() %>% 
-            addCircleMarkers(lng = ~lon, lat = ~lat, fillOpacity = .5, stroke = FALSE)
+            addCircleMarkers(lng = ~lon,
+                             lat = ~lat,
+                             radius = ~log(Assets + 100),
+                             fillOpacity = .5,
+                             color = ~pal(Group),
+                             stroke = FALSE)
 
+    }) 
+    
+    # create legend that shows groups selected with input 
+    observe({
+        
+        pal <- colorpal()
+
+        leafletProxy('map', data = filtered_geo()) %>%
+            clearControls() %>% 
+            addLegend(position = 'bottomright',
+                      pal = pal, values = filtered_geo()$Group)
     })
     
     # create DataTable output utilizing input filter function
