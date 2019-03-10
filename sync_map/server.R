@@ -126,7 +126,12 @@ shinyServer(function(input, output) {
                              radius = ~log(Assets + 100),
                              fillOpacity = .5,
                              color = ~pal(Group),
-                             stroke = FALSE)
+                             stroke = FALSE,
+                             popup = ~paste0(Name, '<br/>',
+                                            'Address: ', dollar(Assets), '<br/>',
+                                            'Income: ', dollar(Income), '<br/>',
+                                            'Revenue: ', dollar(Revenue), '<br/>',
+                                            'Code: ', Code))
 
     }) 
     
