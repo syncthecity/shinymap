@@ -1,9 +1,3 @@
-library(shiny)
-library(shinydashboard)
-library(dashboardthemes)
-library(leaflet)
-library(DT)
-
 # Define UI for application 
 shinyUI(dashboardPage(
     
