@@ -4,21 +4,27 @@ library(dashboardthemes)
 library(leaflet)
 library(DT)
 
-# Define UI for application that draws a histogram
+# Define UI for application 
 shinyUI(dashboardPage(
+    
     dashboardHeader(title = 'Sync the City'),
-    dashboardSidebar(), 
+    dashboardSidebar(disable = TRUE),
+    
     dashboardBody(
         shinyDashboardThemes(
             theme = 'poor_mans_flatly'
         ),
+        
         fluidRow(
-            box(
-                leafletOutput('map', height = 350), width = 12),
+            column(width = 3,
+                box(checkboxGroupInput('groupSelect', 'Organization Groups', 
+                                       choiceNames = groups,
+                                       choiceValues = groups), title = 'Filter', width = NULL)),
             
-        fluidRow(
-            box(
-                DT::DTOutput('table'), width = 12)
+            column(width = 9,
+                   box(leafletOutput('map', height = 350), title = 'Map', width = NULL),
+                   box(DT::DTOutput('table'), title = 'Table', width = NULL))
             )
         )
-    )))
+        
+        ))
