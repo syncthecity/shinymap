@@ -8,7 +8,7 @@ library(DT)
 shinyUI(dashboardPage(
     
     dashboardHeader(title = 'Sync the City'),
-    dashboardSidebar(disable = TRUE),
+    dashboardSidebar(collapsed = TRUE),
     
     dashboardBody(
         shinyDashboardThemes(
