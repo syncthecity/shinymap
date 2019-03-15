@@ -16,7 +16,8 @@ shinyUI(dashboardPage(
                 #                        choiceValues = groups), title = 'Filter', width = NULL),
                 
                 box(selectizeInput('groupSelect', 'Organization Groups', 
-                                   choices = groups_codes, multiple = TRUE), selectize_css,
+                                   choices = groups_codes, multiple = TRUE, options = list(
+                                       plugins = list('remove_button'))), selectize_css,
                     title = 'Filter', height = NULL, width = NULL)),
                 # 
                 # box(textInput('textFilter', 'Text Filter',
