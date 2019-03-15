@@ -1,12 +1,21 @@
 # compile shiny server function
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
 
     # create a reactive data frame based on checkbox inputs 
-    filtered_geo <- reactive({ # if no groups are selected
+    filtered_geo <- reactive({
 
         geo_data %>% 
-            filter(Group %in% input$groupSelect) 
-
+            #filter(Group %in% input$groupSelect)
+            filter(Code %in% input$groupSelect)
+        
+    })
+    
+    updateSelectizeInput(session, 'groupSelect', choices = groups_codes, server = TRUE)
+    
+    output$textFilter <- renderPrint({
+        
+        input$text
+        
     })
     
     # create color palette for coloring groups on map 
