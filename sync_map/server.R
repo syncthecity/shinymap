@@ -5,18 +5,15 @@ shinyServer(function(input, output, session) {
     filtered_geo <- reactive({
 
         geo_data %>% 
-            #filter(Group %in% input$groupSelect)
-            filter(Code %in% input$groupSelect)
+            filter(Code %in% input$groupSelect) %>% 
+            filter(ZIP_FIVE %in% input$zipSelect)
         
     })
     
     updateSelectizeInput(session, 'groupSelect', choices = groups_codes, server = TRUE)
     
-    output$textFilter <- renderPrint({
-        
-        input$text
-        
-    })
+    updateSelectizeInput(session, 'zipSelect', choices = geo_data$ZIP_FIVE, server = TRUE)
+    
     
     # create color palette for coloring groups on map 
     colorpal <- reactive({
@@ -31,6 +28,7 @@ shinyServer(function(input, output, session) {
         leaflet(geo_data, options = leafletOptions(minZoom = 10, maxZoom = 18)) %>% 
             addProviderTiles(provider = providers$CartoDB.Positron) %>% 
             setView(lng = -76.62, lat = 39.29, zoom = 11) %>% 
+            addPolygons(data = zip_bounds, fill = FALSE, weight = 2, opacity = 1) %>% 
             addResetMapButton() 
 
     })

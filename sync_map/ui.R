@@ -11,19 +11,15 @@ shinyUI(dashboardPage(
         
         fluidRow(
             column(width = 3,
-                # box(checkboxGroupInput('groupSelect', 'Organization Groups', 
-                #                        choiceNames = groups,
-                #                        choiceValues = groups), title = 'Filter', width = NULL),
-                
                 box(selectizeInput('groupSelect', 'Organization Groups', 
                                    choices = groups_codes, multiple = TRUE, options = list(
                                        plugins = list('remove_button'))), selectize_css,
-                    title = 'Filter', height = NULL, width = NULL)),
-                # 
-                # box(textInput('textFilter', 'Text Filter',
-                #               value = 'Filter by name...'),
-                #     title = 'Text', width = NULL)),
+                    title = 'Group Filter', height = NULL, width = NULL),
             
+                box(selectizeInput('zipSelect', 'Search Filter',
+                                   choices = unique(geo_data$ZIP_FIVE), multiple = TRUE),
+                    title = 'Zip Filter', width = NULL)),
+           
             column(width = 9,
                    box(leafletOutput('map', height = 350),
                        title = 'Map', width = NULL),

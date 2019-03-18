@@ -1,6 +1,7 @@
 # data manipulation
 library(tidyverse)
 library(scales)
+library(here)
 # web framework
 library(shiny)
 library(shinydashboard)
@@ -8,6 +9,8 @@ library(dashboardthemes)
 # map and table output
 library(leaflet)
 library(leaflet.extras)
+library(rgdal)
+library(sf)
 library(DT)
 
 # load organizations csv  
@@ -117,14 +120,14 @@ geo_data <- geo_data %>%
                  ifelse(codes %in% WED_list, 'Workforce and Economic Development',
                                                                   
                         'Unknown'
-                        )))))))) %>%
+                        )))))))) %>% 
   # rename variables for cleaner presention in DataTable
   rename(Name = NAME) %>% 
   rename(Street = STREET) %>% 
   rename(Assets = ASSET_AMT) %>% 
   rename(Income = INCOME_AMT) %>% 
   rename(Revenue = REVENUE_AMT) %>% 
-  rename(Code = codes)
+  rename(Code = codes) 
 # convert number vars to dollar format 
 #mutate(ASSET_AMT = dollar(ASSET_AMT)) %>% 
 #mutate(INCOME_AMT = dollar(INCOME_AMT)) %>%
@@ -132,3 +135,13 @@ geo_data <- geo_data %>%
 
 # define CSS for selectize to be larger than a single line (temporary fix for box that won't auto-increase)
 selectize_css <- tags$head(tags$style(HTML(".selectize-input {overflow: visible; display: inline-table; font-size: 10px;}")))
+
+# read in shapefile for zip5 boundaries
+zip_bounds <- readOGR(dsn = 'ZIP_files', layer = 'ZIP_Codes') %>% 
+  st_as_sf() %>% 
+  st_transform(4326)
+
+# convert to sf and transform to web map projection  
+#bike_network <- st_as_sf(bike_network)
+#bike_network_trans <- st_transform(bike_network, 4326)
+
