@@ -66,7 +66,7 @@ groups_codes <- list(`Arts and Culture` = c(
                             `Employment, Job-Related` = 'Employment, Job-Related',
                              `Philanthropy, Voluntarism and Grantmaking Foundations` = 'Philanthropy, Voluntarism and Grantmaking Foundations'),
                      
-                     Unknown = 'Unknown'
+                     `Unknown` = c(`Unknown` = 'Unknown', ` ` = ' ')
                      
                      ) 
 

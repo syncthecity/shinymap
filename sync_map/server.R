@@ -29,7 +29,7 @@ shinyServer(function(input, output, session) {
             addProviderTiles(provider = providers$CartoDB.Positron) %>% 
             setView(lng = -76.62, lat = 39.29, zoom = 11) %>% 
             addPolygons(data = zip_bounds, fill = TRUE, fillOpacity = .01, weight = 2, opacity = 1,
-                        label = lapply(labs, HTML)) %>% 
+                        label = lapply(labs, HTML), color = '#3498db') %>% 
             addResetMapButton() 
 
     })
@@ -44,14 +44,14 @@ shinyServer(function(input, output, session) {
             addCircleMarkers(lng = ~lon,
                              lat = ~lat,
                              radius = ~log(Assets + 100),
-                             fillOpacity = .5,
+                             fillOpacity = .6,
                              color = ~pal(Group),
                              stroke = FALSE,
                              popup = ~paste0(Name, '<br/>',
-                                            'Assets: ', dollar(Assets), '<br/>',
-                                            'Income: ', dollar(Income), '<br/>',
-                                            'Revenue: ', dollar(Revenue), '<br/>',
-                                            'Code: ', Code))
+                                            '<strong>Assets: </strong>', dollar(Assets), '<br/>',
+                                            '<strong>Income: </strong>', dollar(Income), '<br/>',
+                                            '<strong>Revenue: </strong>', dollar(Revenue), '<br/>',
+                                            '<strong>Code: </strong>', Code))
 
     }) 
     
