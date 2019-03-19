@@ -28,7 +28,8 @@ shinyServer(function(input, output, session) {
         leaflet(geo_data, options = leafletOptions(minZoom = 10, maxZoom = 18)) %>% 
             addProviderTiles(provider = providers$CartoDB.Positron) %>% 
             setView(lng = -76.62, lat = 39.29, zoom = 11) %>% 
-            addPolygons(data = zip_bounds, fill = FALSE, weight = 2, opacity = 1) %>% 
+            addPolygons(data = zip_bounds, fill = TRUE, fillOpacity = .01, weight = 2, opacity = 1,
+                        label = lapply(labs, HTML)) %>% 
             addResetMapButton() 
 
     })

@@ -17,7 +17,8 @@ shinyUI(dashboardPage(
                     title = 'Group Filter', height = NULL, width = NULL),
             
                 box(selectizeInput('zipSelect', 'Choose organizations by their zip code',
-                                   choices = unique(geo_data$ZIP_FIVE), multiple = TRUE),
+                                   choices = unique(geo_data$ZIP_FIVE), multiple = TRUE, options = list(
+                                       plugins = list('remove_button'))),
                     title = 'Zip Code Filter', width = NULL)),
            
             column(width = 9,

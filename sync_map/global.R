@@ -139,7 +139,10 @@ selectize_css <- tags$head(tags$style(HTML(".selectize-input {overflow: visible;
 # read in shapefile for zip5 boundaries
 zip_bounds <- readOGR(dsn = 'ZIP_files', layer = 'ZIP_Codes') %>% 
   st_as_sf() %>% 
-  st_transform(4326)
+  st_transform(4326) %>% 
+  mutate(labs = paste0('<strong>Zip Code: </strong>', ZIPCODE1))
+
+labs <- as.list(zip_bounds$labs)
 
 # convert to sf and transform to web map projection  
 #bike_network <- st_as_sf(bike_network)
