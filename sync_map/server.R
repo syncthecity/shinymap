@@ -72,7 +72,14 @@ shinyServer(function(input, output, session) {
         filtered_geo() %>% 
             select(Name, Street, Assets, Income, Revenue, Group, Code)
         
-    }))
+    }, 
+    #extensions = 'Scroller',
+    #options = list(
+    #    deferRender = TRUE,
+    #    scrollY = 200,
+    #    scroller = TRUE)
+    extensions = 'Responsive') %>% 
+        formatCurrency(columns = c('Assets', 'Income', 'Revenue'), digits = 0))
     
 
 
