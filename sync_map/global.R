@@ -6,6 +6,9 @@ library(here)
 library(shiny)
 library(shinydashboard)
 library(dashboardthemes)
+library(shinyLP)
+library(shinyBS)
+library(shinythemes)
 # map and table output
 library(leaflet)
 library(leaflet.extras)
@@ -128,10 +131,6 @@ geo_data <- geo_data %>%
   rename(Income = INCOME_AMT) %>% 
   rename(Revenue = REVENUE_AMT) %>% 
   rename(Code = codes) 
-# convert number vars to dollar format 
-#mutate(ASSET_AMT = dollar(ASSET_AMT)) %>% 
-#mutate(INCOME_AMT = dollar(INCOME_AMT)) %>%
-#mutate(REVENUE_AMT = dollar(REVENUE_AMT)) 
 
 # define CSS for selectize to be larger than a single line (temporary fix for box that won't auto-increase)
 selectize_css <- tags$head(tags$style(HTML(".selectize-input {overflow: visible; display: inline-table; font-size: 10px;}")))

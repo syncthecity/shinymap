@@ -51,7 +51,9 @@ shinyServer(function(input, output, session) {
                                             '<strong>Assets: </strong>', dollar(Assets), '<br/>',
                                             '<strong>Income: </strong>', dollar(Income), '<br/>',
                                             '<strong>Revenue: </strong>', dollar(Revenue), '<br/>',
-                                            '<strong>Code: </strong>', Code))
+                                            '<strong>Code: </strong>', Code
+                                            )
+                             )
 
     }) 
     
@@ -63,7 +65,8 @@ shinyServer(function(input, output, session) {
         leafletProxy('map', data = filtered_geo()) %>%
             clearControls() %>% 
             addLegend(position = 'bottomright',
-                      pal = pal, values = filtered_geo()$Group)
+                      pal = pal, values = filtered_geo()$Group
+                      )
     })
     
     # create DataTable output utilizing input filter function
@@ -79,7 +82,9 @@ shinyServer(function(input, output, session) {
     #    scrollY = 200,
     #    scroller = TRUE)
     extensions = 'Responsive') %>% 
-        formatCurrency(columns = c('Assets', 'Income', 'Revenue'), digits = 0))
+        formatCurrency(columns = c('Assets', 'Income', 'Revenue'), digits = 0
+                       )
+    )
     
 
 
