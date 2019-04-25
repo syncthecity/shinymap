@@ -21,7 +21,7 @@ Shiny web application developed in R
 * A table that reacts to filtering and tabulates organizations on the map
 * A network graph of organizations and who they work with 
 
-## Where are you getting this data from?
+## Where are we getting this data from?
 * We are currently using publically available data published by the IRS
 * Some of our data model has been appended ourselves
 
