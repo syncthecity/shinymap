@@ -1,3 +1,7 @@
+Dockerfile
+README.md
+.dockerignore
+
 # History files
 .Rhistory
 .Rapp.history
