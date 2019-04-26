@@ -86,6 +86,30 @@ shinyServer(function(input, output, session) {
                        )
     )
     
+    output$network <- renderVisNetwork({
+        
+        nodes <- data.frame(id = unique(filtered_geo()$Name),
+                            title = unique(filtered_geo()$Name),
+                            group = filtered_geo()$Group)
+        
+        edges <- data.frame(from = unique(filtered_geo()$Name), to = unique(filtered_geo()$partner))
+        
+        visNetwork(nodes, edges) %>% 
+            visGroups(groupname = 'Arts and Culture', color = '#66C2A5') %>% 
+            visGroups(groupname = 'Children and Family Health', color = '#FC8D62') %>% 
+            visGroups(groupname = 'Crime and Safety', color = '#8DA0CB') %>% 
+            visGroups(groupname = 'Education and Youth', color = '#E78AC3') %>% 
+            visGroups(groupname = 'Housing and Community Development', color = '#FFD92F') %>% 
+            visGroups(groupname = 'Sustainability', color = '#A6D854') %>% 
+            visGroups(groupname = 'Workforce and Economic Development', color = '#B3B3B3') %>% 
+            visGroups(groupname = 'Unknown', color = '#E5C494') %>% 
+            visLegend() %>% 
+            visPhysics(stabilization = FALSE) %>% 
+            visEdges(smooth = FALSE) %>% 
+            visOptions(highlightNearest = TRUE)  
+    
+    })
+    
 
 
     

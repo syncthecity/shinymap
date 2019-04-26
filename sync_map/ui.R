@@ -46,7 +46,7 @@ shinyUI(
                             ),
                    
                    # define tool UI 
-                   tabPanel('Explore', icon = icon('map-marker-alt'),
+                   tabPanel('Map', icon = icon('map-marker-alt'),
                             dashboardPage(
                                 
                                 dashboardHeader(disable = TRUE),
@@ -86,6 +86,29 @@ shinyUI(
                                                    ),
                                                box(DT::DTOutput('table'),
                                                    title = 'Table', width = NULL
+                                                   )
+                                               )
+                                        )
+                                    )
+                                )
+                            ),
+                   
+                   tabPanel('Network', icon = icon('project-diagram'),
+                            dashboardPage(
+                                
+                                dashboardHeader(disable = TRUE),
+                                dashboardSidebar(disable = TRUE),
+                                
+                                dashboardBody(
+                                    shinyDashboardThemes(
+                                        theme = 'poor_mans_flatly'
+                                        ),
+                                    
+                                    fluidRow(
+                                        
+                                        column(width = 12,
+                                               box(visNetworkOutput('network'),
+                                                   title = 'Network', width = NULL
                                                    )
                                                )
                                         )

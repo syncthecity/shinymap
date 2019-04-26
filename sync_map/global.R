@@ -15,6 +15,8 @@ library(leaflet.extras)
 library(rgdal)
 library(sf)
 library(DT)
+# network output
+library(visNetwork)
 
 # load organizations csv  
 geo_data <- read_csv("geo_all.csv") 
@@ -124,6 +126,7 @@ geo_data <- geo_data %>%
                                                                   
                         'Unknown'
                         )))))))) %>% 
+  mutate(partner = sample(NAME)) %>% 
   # rename variables for cleaner presention in DataTable
   rename(Name = NAME) %>% 
   rename(Street = STREET) %>% 
