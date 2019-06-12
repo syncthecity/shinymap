@@ -1,3 +1,7 @@
+Dockerfile
+README.md
+.dockerignore
+
 # History files
 .Rhistory
 .Rapp.history
@@ -36,5 +40,3 @@ vignettes/*.pdf
 rsconnect/
 packrat/lib*/
 packrat/src*/
-
-.DS_Store
