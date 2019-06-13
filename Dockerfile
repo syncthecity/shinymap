@@ -1,29 +1,4 @@
-FROM rocker/r-ver:3.5.3
-
-RUN apt-get update && apt-get install -y \
-    sudo \
-    build-essential \
-    gdebi-core \
-    pandoc \
-    pandoc-citeproc \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    xtail \
-    wget
-
-RUN apt-get -y install libcurl4-openssl-dev libssl-dev libudunits2-dev libxml2-dev libgdal-dev libgeos-dev libproj-dev 
-
-# TODO - create user
-RUN mkdir -p /home/shinymap/app
-COPY . /home/shinymap/app
-
-WORKDIR /home/shinymap/app
-RUN Rscript util/deps.R
-
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH":"$HOME"/udunits/local/lib"
-
-RUN R -e 'install.packages("packrat" , repos="http://cran.us.r-project.org"); packrat::restore()'
+FROM sleyva97/shinymap-base:latest
 
 EXPOSE 3838
 CMD ["Rscript", "/home/shinymap/app/app.R"]
