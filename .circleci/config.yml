@@ -1,14 +1,12 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: rocker/r-ver:3.5.3
+    machine: true
     steps:
       - checkout
       - run:
           name: Check for changed files
           command: |
-                  apt update && apt install git -y
                   set +e
                   git log -m -1 --name-only --pretty="format:" | grep -i packrat
                   if [ $? -eq 0 ]; then
