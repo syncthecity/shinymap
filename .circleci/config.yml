@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: rocker/r-ver:3.5.3
+    steps:
+      - checkout
+      - run:
+          name: Check for changed files
+          command: |
+                  apt update && apt install git -y
+                  set +e
+                  git log -m -1 --name-only --pretty="format:" | grep -i packrat
+                  if [ $? -eq 0 ]; then
+                        printf '%s\n' "packrat changed"
+                        docker build . -f Dockerfile.base -t "sleyva97/shinymap-base:latest"
+                  else
+                        printf '%s\n' "No dependancies changed"
+                  fi
