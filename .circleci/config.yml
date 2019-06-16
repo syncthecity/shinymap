@@ -13,7 +13,7 @@ jobs:
                   git log -m -1 --name-only --pretty="format:" | grep -i packrat
                   if [ $? -eq 0 ]; then
                         printf '%s\n' "packrat changed"
-                        docker build . -f Dockerfile.base -t "sleyva97/shinymap-base:latest"
+                        docker build . -f Dockerfile.base -t "syncthecity/syncthecity-base:latest"
                   else
                         printf '%s\n' "No dependancies changed"
                   fi

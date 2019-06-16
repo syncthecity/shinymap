@@ -1,4 +1,4 @@
-FROM sleyva97/shinymap-base:latest
+FROM syncthecity/syncthecity-base:latest
 
 EXPOSE 3838
 CMD ["Rscript", "/home/shinymap/app/app.R"]
