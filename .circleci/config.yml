@@ -15,3 +15,16 @@ jobs:
                   else
                         printf '%s\n' "No dependancies changed"
                   fi
+      - run:
+          name: Rebuild App image and run tests
+          command: |
+                  docker-compose up --exit-code-from test | grep test_1
+      - run:
+          name: promote image
+          command: |
+                  docker tag syncthecity/syncthecity-baltimore:${CIRCLE_SHA1} syncthecity/syncthecity-baltimore:latest
+      - run:
+          name: deploy to heroku
+          command: |
+                  printf '%s\n' "Put step to deploy to heroku here"
+
