@@ -25,6 +25,7 @@ jobs:
           name: promote image
           command: |
                   docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                  docker push syncthecity/syncthecity-baltimore:${CIRCLE_SHA1}
                   docker tag syncthecity/syncthecity-baltimore:${CIRCLE_SHA1} syncthecity/syncthecity-baltimore:latest
                   docker push syncthecity/syncthecity-baltimore:latest
       - run:
