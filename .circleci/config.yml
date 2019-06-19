@@ -10,8 +10,10 @@ jobs:
                   set +e
                   git log -m -1 --name-only --pretty="format:" | grep -i packrat
                   if [ $? -eq 0 ]; then
-                        printf '%s\n' "packrat changed"
+                        printf '%s\n' "packrat changed rebuilding"
+                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                         docker build . -f Dockerfile.base -t "syncthecity/syncthecity-base:latest"
+                        docker push "syncthecity/syncthecity-base:latest"
                   else
                         printf '%s\n' "No dependancies changed"
                   fi
@@ -22,7 +24,9 @@ jobs:
       - run:
           name: promote image
           command: |
+                  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                   docker tag syncthecity/syncthecity-baltimore:${CIRCLE_SHA1} syncthecity/syncthecity-baltimore:latest
+                  docker push syncthecity/syncthecity-baltimore:latest
       - run:
           name: deploy to heroku
           command: |
