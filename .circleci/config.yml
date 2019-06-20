@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Check for changed files
+          command: |
+                  set +e
+                  git log -m -1 --name-only --pretty="format:" | grep -i packrat
+                  if [ $? -eq 0 ]; then
+                        printf '%s\n' "packrat changed rebuilding"
+                        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                        docker build . -f Dockerfile.base -t "syncthecity/syncthecity-base:latest"
+                        docker push "syncthecity/syncthecity-base:latest"
+                  else
+                        printf '%s\n' "No dependancies changed"
+                  fi
+      - run:
+          name: Rebuild App image and run tests
+          command: |
+                  docker-compose up --exit-code-from test | grep test_1
+      - run:
+          name: promote image
+          command: |
+                  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                  docker push syncthecity/syncthecity-baltimore:${CIRCLE_SHA1}
+                  docker tag syncthecity/syncthecity-baltimore:${CIRCLE_SHA1} syncthecity/syncthecity-baltimore:latest
+                  docker push syncthecity/syncthecity-baltimore:latest
+      - run:
+          name: deploy to heroku
+          command: |
+                  printf '%s\n' "Put step to deploy to heroku here"
+
