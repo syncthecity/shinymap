@@ -30,7 +30,7 @@ shinyUI(
                                                              )
                                        ),
                                 column(6, shinyLP::panel_div(class_type = 'primary', panel_title = 'What?',
-                                                             content = 'A tool to connect organizations and identify resources.'
+                                                             content = 'A tool to link organizations and identify resources.'
                                                              )
                                        )
                                 ),
