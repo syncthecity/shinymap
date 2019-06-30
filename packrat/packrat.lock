@@ -35,10 +35,19 @@ Version: 1.0.1
 Hash: 390ed5b5da840cec3e6f5c90c6ab23f7
 
 Package: argonDash
-Source: CRAN
-Version: 0.1.0
-Hash: 34cb0db28e9120ea95cecce56157177b
+Source: github
+Version: 0.2.0.9000
+Hash: 06b8e13f5611e666b02439f72386fe8f
 Requires: argonR, htmltools, shiny
+GithubRepo: argonDash
+GithubUsername: RinteRface
+GithubRef: master
+GithubSha1: ab254349e1edd77fe8a63a9baa0d5f9e05d56deb
+RemoteHost: api.github.com
+RemoteRepo: argonDash
+RemoteUsername: RinteRface
+RemoteRef: master
+RemoteSha: ab254349e1edd77fe8a63a9baa0d5f9e05d56deb
 
 Package: argonR
 Source: CRAN
